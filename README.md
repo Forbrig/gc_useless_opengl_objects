@@ -1,2 +1,3 @@
 # useless_opengl_objects
 Modeling objects with nurbs in opengl. I wanna cry...
+Comments on the code are in portuguese - Brazil.
