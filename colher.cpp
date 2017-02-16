@@ -21,34 +21,36 @@ GLfloat concha_colh[4][4][3] = {
 
 GLfloat alca_colh[4][4][3] = {
     {
-        { -0.25, 1.5, 0},    { -0.15, 1.5, 0}, 
-        { 0.15, 1.5, 0},     { 0.25, 1.5, 0}
+        { -0.10, 1.5, 0},    { -0.05, 1.5, 0}, 
+        { 0.05, 1.5, 0},     { 0.10, 1.5, 0}
     }, 
     {
-        { -0.25, 0.5, 0.25},    { -0.15, 0.5, 0.40}, 
-        { 0.15, 0.5, 0.40},    {0.25, 0.5, 0.25}
+        { -0.10, 0.85, 0.35},    { -0.05, 0.85, 0.50}, 
+        { 0.05, 0.85, 0.50},    {0.10, 0.85, 0.35}
     }, 
     {
         { -0.25, -0.5, 0},     { -0.15, -0.5, 0}, 
         { 0.15, -0.5, 0},       { 0.25, -0.5, 0}
     }, 
     {
-        { -0.25, -1.5, 0},    { -0.15, -1.5, 0}, 
-        {0.15, -1.5, 0},       {0.25, -1.5, 0}
+        { -0.15, -1.25, 0},    { -0.15, -1.5, 0}, 
+        {0.15, -1.5, 0},       {0.15, -1.25, 0}
     }
 };
 
 // desenha todas as partes
 void desenha_colher (void) {
-    glPushMatrix(); 
+    glColor4f(1, 1, 1, 0.4); // cinza
+    glPushMatrix();
         glPushMatrix();
-            //glTranslatef(0, 3.9, 0);
-            glEnable(GL_BLEND);
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-            glColor4f(1, 1, 1, 0.4);
-            //glRotatef(90, 1, 0, 0);
-            //drawSurface(concha_colh); //
+            glTranslatef(0, -2.67, 0); //1.5 + 1.25
             drawSurface(alca_colh);
-        
+        glPopMatrix();
+
+
+        glPushMatrix();
+            drawSurface(concha_colh);
+        glPopMatrix();
+
     glPopMatrix();
 }
