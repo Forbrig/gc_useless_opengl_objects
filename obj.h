@@ -6,6 +6,7 @@
 
 extern int flagPoints; // flag para mostrar os pontos do nurbs
 extern GLUnurbsObj *theNurb;
+extern GLUnurbsObj *theNurbEsp;
 
 //função que mostra os pontos dos nurbs
 void showPoints(GLfloat surfaceVec[4][4][3]);
@@ -13,11 +14,16 @@ void showPoints(GLfloat surfaceVec[4][4][3]);
 // função que desenha
 void drawSurface(GLfloat surfaceVec[4][4][3]);
 
+// espelha a imagem (avesso)
+void espelha (GLfloat esp[4][4][3]);
+
 // objeto 1
 void desenha_frig(void);
 
 // objeto 2
 void desenha_colher(void);
+
+// objeto 3
 
 
 /*
@@ -69,6 +75,4 @@ GLfloat cois_redonda[4][4][3] = {
         {0.5, -1.5, 0},       {0.5, -0.5, 0}
     }
 };
-
-
 */
