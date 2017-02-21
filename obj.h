@@ -18,13 +18,16 @@ void drawSurface(GLfloat surfaceVec[4][4][3]);
 void drawSurface2(GLfloat surfaceVec[4][9][3], int x, int y, int z);
 
 // objeto 1
-void desenha_frig(void);
+void desenha_prato(void);
 
 // objeto 2
 void desenha_colher(void);
 
 // obj 3
 void desenha_pote(void);
+
+//
+void desenha_mesa(void);
 
 
 /*

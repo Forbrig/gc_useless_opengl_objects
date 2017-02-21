@@ -6,22 +6,51 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "obj.h"  
-GLfloat gira = 0;
+
+float rotate_y = 0; 
+float rotate_x = 0;
 
 int flagPoints = 0; // var global
 GLUnurbsObj *theNurb;
 
 void display(void) {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  glPushMatrix();
-  	gluLookAt (0, 0, 10, 0, 0, 0, 0, 1, 0);
-
-    glRotatef(gira += .1, 1, 1, 0);
-    //desenha_frig();
-    desenha_colher();
-    
-    //desenha_pote();
+  glEnable(GL_DEPTH_TEST);
   
+  glPushMatrix();
+  	// camera/observador
+  	gluLookAt (0, 0, 10, 0, 0, 0, 0, 1, 0);	
+  	// rotaciona o plano
+  	glRotatef( rotate_x, 1.0, 0.0, 0.0 );
+    glRotatef( rotate_y, 0.0, 1.0, 0.0 );
+    
+    /*
+    desenha_mesa();
+    
+    glPushMatrix();
+    	glTranslatef(2., -1., 0.5);
+	    //desenha_frig();
+	    desenha_colher();
+	glPopMatrix();
+    
+    // pote 1
+    glPushMatrix();
+    	glScalef(0.5, 0.5, 0.5);	
+    	glTranslatef(0, 0, 0.8);
+	    desenha_pote();
+	glPopMatrix();
+
+	// pote 2
+	glPushMatrix();
+    	glTranslatef(-3.0, -3.0, 0.7);
+    	glRotatef(180, 0, 1, 0);
+	    desenha_pote();
+	glPopMatrix();
+	*/
+
+	desenha_prato();
+
+
 
   glPopMatrix();
   glFlush();
@@ -37,9 +66,9 @@ void nurbsError(GLenum errorCode) {
    
 // inicia algumas diretivas, como luz
 void init(void) {
-   GLfloat luzAmbiente[4] = { 0.2,0.2,0.2,1.0 };
-    GLfloat luzDifusa[4] = { 0.7,0.6,0.6,1.0 };    // "cor"
-    GLfloat luzEspecular[4] = { 0.8,0.8,0.8, 1.0 };// "brilho"
+   	GLfloat luzAmbiente[4] = { 0.2, 0.2, 0.2, 1.0 };
+    GLfloat luzDifusa[4] = { 0.7, 0.6, 0.6, 1.0 };    // "cor"
+    GLfloat luzEspecular[4] = { 0.8, 0.8, 0.8, 1.0 }; // "brilho"
     GLfloat posicaoLuz[4] = { 10.0, 10.0, 0, 1.0 };
 //
     // Capacidade de brilho do material
@@ -89,17 +118,41 @@ void keyboard(unsigned char key, int x, int y) {
    switch (key) {
       case 'c':
       case 'C':
-         flagPoints = !flagPoints;
-         glutPostRedisplay();
-         break;
+        flagPoints = !flagPoints;
+        glutPostRedisplay();
+        break;
       case 27:
-         exit(0);
-         break;
+        exit(0);
+        break;
       default:
          break;
    }
 }
 
+// funcoes para botoes especiais do glut
+void specialKeys( int key, int x, int y ) {
+   switch (key) {
+      case 27:
+        exit(0);
+        break;
+      case GLUT_KEY_RIGHT :
+      	rotate_y += 5;
+      	break;
+      case GLUT_KEY_LEFT :
+      	rotate_y -= 5;
+      	break;
+      case GLUT_KEY_UP :
+      	rotate_x += 5;
+      	break;
+      case GLUT_KEY_DOWN :
+      	rotate_x -= 5;
+      	break;
+      default:
+         break;
+   }
+  glutPostRedisplay();
+ 
+} 
 
 void Redraw(void) { // função de loop
    glutPostRedisplay();
@@ -116,7 +169,8 @@ int main(int argc, char** argv)
    glutIdleFunc(Redraw);
    glutReshapeFunc(reshape);
    glutDisplayFunc(display);
-   glutKeyboardFunc (keyboard);
+   glutSpecialFunc(specialKeys);
+   glutKeyboardFunc(keyboard);
    glutMainLoop();
    return 0; 
 }

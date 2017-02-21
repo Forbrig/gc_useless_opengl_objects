@@ -23,8 +23,8 @@ void showPoints(GLfloat surfaceVec[4][4][3]) {
                 glVertex3f(surfaceVec[i][j][0], surfaceVec[i][j][1], surfaceVec[i][j][2]);
             }
         }
-    glEnd();
-    glEnable(GL_LIGHTING);
+    	glEnd();
+    	glEnable(GL_LIGHTING);
     }
 }
 
