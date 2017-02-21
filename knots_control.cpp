@@ -1,7 +1,7 @@
 #include "obj.h"
 
-// função que recebe uma superfície 16x16 e a desenha
-// todos os objetos aqui são 16x16
+// função que recebe uma superfície com 16 pontos e a desenha
+// todos os objetos aqui são com 16 pontos
 void drawSurface(GLfloat surfaceVec[4][4][3]) {
     GLfloat knots[8] = {0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0};
     gluBeginSurface(theNurb);
@@ -28,6 +28,28 @@ void showPoints(GLfloat surfaceVec[4][4][3]) {
     }
 }
 
+// outra função para desenhar superficies em nurbs,
+// tive dificuldades em editar a primeira
+// x, y, z são surfaceVec[x][y][z]
+void drawSurface2(GLfloat surfaceVec[4][9][3], int x, int y, int z) {
+		int u, v;
+		GLint un = 30;
+		GLint vn = 30;
+
+	    glMap2f(GL_MAP2_VERTEX_3, 0, 1, y*z, x, 0, 1, z, y, &surfaceVec[0][0][0]);
+	    glEnable(GL_MAP2_VERTEX_3);
+	    glEnable(GL_AUTO_NORMAL);
+	    glBegin(GL_QUADS);
+	    for (u = 0; u < un; u++) {
+	        for (v = 0; v < vn; v++) {
+	            glEvalCoord2f((GLfloat)v / vn, (GLfloat)(u+1) / un);
+	            glEvalCoord2f((GLfloat)(v+1) / vn, (GLfloat)(u+1) / un);
+	            glEvalCoord2f((GLfloat)(v+1) / vn, (GLfloat)u / un);
+	            glEvalCoord2f((GLfloat)v / vn, (GLfloat)u / un);
+	        }
+	    }
+	    glEnd();
+}
 /*
 // espelha imagens simétricas
 // utilizado para espelhar objetos, pois a luz só é calculada (e refletida),

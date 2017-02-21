@@ -1,6 +1,6 @@
 #include "obj.h"
 
-GLfloat borda_frig[4][9][3] = {
+GLfloat borda_pote[4][9][3] = {
     {
        	{ -3.0, 0.0, -1.0 }, { -3.0, 3.0,-1.0 }, { 0.0, 3.0, -1.0 }, { 3.0, 3.0,-1.0 }, { 3.0, 0.0,-1.0 },
        	{ 3.0, -3.0,-1.0 }, { 0.0, -3.0,-1.0 }, { -3.0, -3.0,-1.0 }, { -3.0, 0.0,-1.0 }
@@ -20,12 +20,12 @@ GLfloat borda_frig[4][9][3] = {
 };
 
 // desenha todas as partes
-void desenha_frig (void) {
+void desenha_pote (void) {
     glPushMatrix();
-    	glColor4f(1, 1, 1, 0.4); 
-    	drawSurface2(borda_frig, 4, 9, 3);
-	    
+      glColor4f(1, 1, 1, 0.4); 
+      drawSurface2(borda_pote, 4, 9, 3);
+      
 
-	    
+      
     glPopMatrix();
 }
