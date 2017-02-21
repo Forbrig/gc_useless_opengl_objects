@@ -79,6 +79,8 @@ GLfloat alca_colh_esp[4][4][3] = {
 // desenha todas as partes
 void desenha_colher(void) {
     glColor4f(1, 1, 1, 0.4); // cinza prateado
+    //glEnable (GL_BLEND); 
+    //glBlendFunc (GL_ONE, GL_ONE);
     glPushMatrix();
         // alca
         glPushMatrix();
@@ -86,7 +88,7 @@ void desenha_colher(void) {
             drawSurface(alca_colh);
             glPushMatrix();
                 glRotatef(180, 0, 1, 0);
-                glTranslatef(0, 0, 0.005);
+                glTranslatef(0, 0, 0.01);
                 drawSurface(alca_colh_esp);
             glPopMatrix();
         glPopMatrix();
@@ -96,10 +98,11 @@ void desenha_colher(void) {
             drawSurface(concha_colh);
             glPushMatrix();
                 glRotatef(180, 0, 1, 0);
-                glTranslatef(0, 0, 0.005);
+                glTranslatef(0, 0, 0.01);
                 drawSurface(concha_colh_esp);
             glPopMatrix();
         glPopMatrix();
         
     glPopMatrix();
+    //glDisable (GL_BLEND);
 }

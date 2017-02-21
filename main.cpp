@@ -11,18 +11,18 @@ GLfloat gira = 0;
 int flagPoints = 0; // var global
 GLUnurbsObj *theNurb;
 
-double arr = 0;
-
 void display(void) {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glPushMatrix();
-
-  gluLookAt (0, 0, 30, 0, 0, 0, 0, 1, 0);
+  	gluLookAt (0, 0, 10, 0, 0, 0, 0, 1, 0);
 
     glRotatef(gira += .1, 1, 1, 0);
-    desenha_frig();
-    //desenha_colher();
+    //desenha_frig();
+    desenha_colher();
     
+    //desenha_pote();
+  
+
   glPopMatrix();
   glFlush();
 }
@@ -37,22 +37,35 @@ void nurbsError(GLenum errorCode) {
    
 // inicia algumas diretivas, como luz
 void init(void) {
-   GLfloat mat_diffuse[] = { 0.7, 0.7, 0.7, 1.0 };
-   GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
-   GLfloat mat_shininess[] = { 100.0 };
+   GLfloat luzAmbiente[4] = { 0.2,0.2,0.2,1.0 };
+    GLfloat luzDifusa[4] = { 0.7,0.6,0.6,1.0 };    // "cor"
+    GLfloat luzEspecular[4] = { 0.8,0.8,0.8, 1.0 };// "brilho"
+    GLfloat posicaoLuz[4] = { 10.0, 10.0, 0, 1.0 };
+//
+    // Capacidade de brilho do material
+    GLfloat especularidade[4] = { 0.0,0.0,0.0,1.0 };
+    GLint especMaterial = 2;
 
-   glClearColor (0.0, 0.0, 0.0, 0.0);
-   glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
-   glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
-   glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
+    // Define a reflet�ncia do material
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, especularidade);
+    // Define a concentra��o do brilho
+    glMateriali(GL_FRONT_AND_BACK, GL_SHININESS, especMaterial);
 
-   glEnable(GL_LIGHTING);
-   glEnable(GL_LIGHT0);
-   glEnable(GL_DEPTH_TEST);
-   glEnable(GL_AUTO_NORMAL);
-   glEnable(GL_NORMALIZE);
+    // Ativa o uso da luz ambiente
+    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, luzAmbiente);
 
-   //init_surface();
+    // Define os par�metros da luz de n�mero 0
+    glLightfv(GL_LIGHT1, GL_AMBIENT, luzAmbiente);
+    glLightfv(GL_LIGHT1, GL_DIFFUSE, luzDifusa);
+    glLightfv(GL_LIGHT1, GL_SPECULAR, luzEspecular);
+    glLightfv(GL_LIGHT1, GL_POSITION, posicaoLuz);
+
+    // Habilita a defini��o da cor do material a partir da cor corrente
+    glEnable(GL_COLOR_MATERIAL);
+    //Habilita o uso de ilumina��o
+    glEnable(GL_LIGHTING);
+    // Habilita a luz de n�mero 1
+    glEnable(GL_LIGHT1);
 
    theNurb = gluNewNurbsRenderer();
    gluNurbsProperty(theNurb, GLU_SAMPLING_TOLERANCE, 25.0);
