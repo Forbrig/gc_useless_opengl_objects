@@ -1,13 +1,13 @@
-//g++ main.cpp -o main -lglut -lGL -lGLU
+//g++ *.cpp -o main -lglut -lGL -lGLU
 //referencias: http://www.glprogramming.com/red/chapter12.html
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "obj.h"  
+#include "obj.h"
 
-float rotate_y = 0; 
+float rotate_y = 0;
 float rotate_x = 0;
 
 int flagPoints = 0; // var global
@@ -16,41 +16,34 @@ GLUnurbsObj *theNurb;
 void display(void) {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glEnable(GL_DEPTH_TEST);
-  
+
   glPushMatrix();
-  	// camera/observador
-  	gluLookAt (0, 0, 10, 0, 0, 0, 0, 1, 0);	
-  	// rotaciona o plano
-  	glRotatef( rotate_x, 1.0, 0.0, 0.0 );
+    //camera/observador
+    gluLookAt (0, 0, 10, 0, 0, 0, 0, 1, 0);
+    //rotaciona o plano
+    glRotatef( rotate_x, 1.0, 0.0, 0.0 );
     glRotatef( rotate_y, 0.0, 1.0, 0.0 );
-    
-    /*
     desenha_mesa();
-    
+
     glPushMatrix();
-    	glTranslatef(2., -1., 0.5);
-	    //desenha_frig();
-	    desenha_colher();
-	glPopMatrix();
-    
-    // pote 1
+      glTranslatef(2., -1., 0.5);
+      //desenha_frig();
+      desenha_colher();
+    glPopMatrix();
+
+    //pote 1
     glPushMatrix();
-    	glScalef(0.5, 0.5, 0.5);	
-    	glTranslatef(0, 0, 0.8);
-	    desenha_pote();
-	glPopMatrix();
+      glScalef(0.5, 0.5, 0.5);
+      glTranslatef(0, 0, 0.8);
+      desenha_pote();
+    glPopMatrix();
 
-	// pote 2
-	glPushMatrix();
-    	glTranslatef(-3.0, -3.0, 0.7);
-    	glRotatef(180, 0, 1, 0);
-	    desenha_pote();
-	glPopMatrix();
-	*/
-
-	desenha_prato();
-
-
+    // pote 2
+    glPushMatrix();
+      glTranslatef(-3.0, -3.0, 0.7);
+  	  glRotatef(180, 0, 1, 0);
+      desenha_pote();
+    glPopMatrix();
 
   glPopMatrix();
   glFlush();
@@ -63,7 +56,7 @@ void nurbsError(GLenum errorCode) {
    fprintf (stderr, "Nurbs Error: %s\n", estring);
    exit (0);
 }
-   
+
 // inicia algumas diretivas, como luz
 void init(void) {
    	GLfloat luzAmbiente[4] = { 0.2, 0.2, 0.2, 1.0 };
@@ -151,8 +144,8 @@ void specialKeys( int key, int x, int y ) {
          break;
    }
   glutPostRedisplay();
- 
-} 
+
+}
 
 void Redraw(void) { // função de loop
    glutPostRedisplay();
@@ -172,5 +165,5 @@ int main(int argc, char** argv)
    glutSpecialFunc(specialKeys);
    glutKeyboardFunc(keyboard);
    glutMainLoop();
-   return 0; 
+   return 0;
 }
