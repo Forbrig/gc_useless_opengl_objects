@@ -17,52 +17,52 @@ void drawSurface(GLfloat surfaceVec[4][4][3]);
 // desenhar coisas redondas
 void drawSurface2(GLfloat surfaceVec[4][9][3], int x, int y, int z);
 
-// objeto 1
-void desenha_prato(void);
-
-// objeto 2
+//colher
 void desenha_colher(void);
 
-// obj 3
+//pote
 void desenha_pote(void);
 
-//
+//mesa
 void desenha_mesa(void);
+
+//frigideira
+void desenha_frig (void);
 
 
 /*
        +1  ^ Y
    *    *  |  *    *
-  
+
    *    *  |  *    *
 -1 ------------------> +1 X
    *    *  |  *    *
-  
+
    *    *  |  *    *
        -1
 
 // sup_esq (-1.5, 1.5, 0), inf_dir (1.5, -1.5, 0)
 GLfloat coisa_quadrada[4][4][3] = {
    {
-        { -1.5, 1.5, 0},    { -0.5, 1.5, 0}, 
+        { -1.5, 1.5, 0},    { -0.5, 1.5, 0},
         { 0.5, 1.5, 0},     { 1.5, 1.5, 0}
-    }, 
+    },
     {
-        { -1.5, 0.5, 0},    { -0.5, 0.5, 0}, 
+        { -1.5, 0.5, 0},    { -0.5, 0.5, 0},
         { 0.5, 0.5, 0},    {1.5, 0.5, 0}
-    }, 
+    },
     {
-        { -1.5, -0.5, 0},     { -0.5, -0.5, 0}, 
+        { -1.5, -0.5, 0},     { -0.5, -0.5, 0},
         { 0.5, -0.5, 0},       { 1.5, -0.5, 0}
-    }, 
+    },
     {
-        { -1.5, -1.5, 0},    { -0.5, -1.5, 0}, 
+        { -1.5, -1.5, 0},    { -0.5, -1.5, 0},
         {0.5, -1.5, 0},       {1.5, -1.5, 0}
     }
 };
 
 GLfloat cois_redonda[4][4][3] = {
  {
-     
+
 };
 */

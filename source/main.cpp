@@ -21,13 +21,13 @@ void display(void) {
     //camera/observador
     gluLookAt (0, 0, 10, 0, 0, 0, 0, 1, 0);
     //rotaciona o plano
-    glRotatef( rotate_x, 1.0, 0.0, 0.0 );
-    glRotatef( rotate_y, 0.0, 1.0, 0.0 );
+    glRotatef(rotate_x, 1.0, 0.0, 0.0 );
+    glRotatef(rotate_y, 0.0, 0.0, 1.0 );
+
     desenha_mesa();
 
     glPushMatrix();
       glTranslatef(2., -1., 0.5);
-      //desenha_frig();
       desenha_colher();
     glPopMatrix();
 
@@ -38,7 +38,7 @@ void display(void) {
       desenha_pote();
     glPopMatrix();
 
-    // pote 2
+    //pote 2
     glPushMatrix();
       glTranslatef(-3.0, -3.0, 0.7);
   	  glRotatef(180, 0, 1, 0);
@@ -49,7 +49,7 @@ void display(void) {
   glFlush();
 }
 
-// flag de erros do nurbs
+//flag de erros do nurbs
 void nurbsError(GLenum errorCode) {
    const GLubyte *estring;
    estring = gluErrorString(errorCode);
@@ -57,36 +57,26 @@ void nurbsError(GLenum errorCode) {
    exit (0);
 }
 
-// inicia algumas diretivas, como luz
+//inicia algumas diretivas, como luz
 void init(void) {
    	GLfloat luzAmbiente[4] = { 0.2, 0.2, 0.2, 1.0 };
-    GLfloat luzDifusa[4] = { 0.7, 0.6, 0.6, 1.0 };    // "cor"
-    GLfloat luzEspecular[4] = { 0.8, 0.8, 0.8, 1.0 }; // "brilho"
+    GLfloat luzDifusa[4] = { 0.7, 0.6, 0.6, 1.0 };    //"cor"
+    GLfloat luzEspecular[4] = { 0.8, 0.8, 0.8, 1.0 }; //"brilho"
     GLfloat posicaoLuz[4] = { 10.0, 10.0, 0, 1.0 };
-//
-    // Capacidade de brilho do material
-    GLfloat especularidade[4] = { 0.0,0.0,0.0,1.0 };
-    GLint especMaterial = 2;
 
-    // Define a reflet�ncia do material
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, especularidade);
-    // Define a concentra��o do brilho
-    glMateriali(GL_FRONT_AND_BACK, GL_SHININESS, especMaterial);
-
-    // Ativa o uso da luz ambiente
+    //Ativa o uso da luz ambiente
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, luzAmbiente);
-
-    // Define os par�metros da luz de n�mero 0
+    //Define os parametros da luz de numero 0
     glLightfv(GL_LIGHT1, GL_AMBIENT, luzAmbiente);
     glLightfv(GL_LIGHT1, GL_DIFFUSE, luzDifusa);
     glLightfv(GL_LIGHT1, GL_SPECULAR, luzEspecular);
     glLightfv(GL_LIGHT1, GL_POSITION, posicaoLuz);
 
-    // Habilita a defini��o da cor do material a partir da cor corrente
+    //Habilita a definicao da cor do material a partir da cor corrente
     glEnable(GL_COLOR_MATERIAL);
-    //Habilita o uso de ilumina��o
+    //Habilita o uso de iluminacao
     glEnable(GL_LIGHTING);
-    // Habilita a luz de n�mero 1
+    // Habilita a luz de numero 1
     glEnable(GL_LIGHT1);
 
    theNurb = gluNewNurbsRenderer();
@@ -123,7 +113,7 @@ void keyboard(unsigned char key, int x, int y) {
 }
 
 // funcoes para botoes especiais do glut
-void specialKeys( int key, int x, int y ) {
+void specialKeys(int key, int x, int y) {
    switch (key) {
       case 27:
         exit(0);
@@ -144,15 +134,13 @@ void specialKeys( int key, int x, int y ) {
          break;
    }
   glutPostRedisplay();
-
 }
 
-void Redraw(void) { // função de loop
+void Redraw(void) { //função de loop
    glutPostRedisplay();
 }
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
    glutInit(&argc, argv);
    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
    glutInitWindowSize (500, 500);
